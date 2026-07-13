@@ -1,0 +1,17 @@
+{
+    "products": [
+        {
+            "id": 1,
+            "name": "ABC",
+            "price": 100000,
+            "image": ""
+        },
+        {
+            "id": 2,
+            "name": "XYZ",
+            "price": 200000,
+            "image": ""
+        }
+    ],
+    "users": []
+}
