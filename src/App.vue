@@ -23,31 +23,45 @@ const students = reactive([
   {
     name: 'thaivm3',
     birth: 1971,
+    avatar: "https://picsum.photos/200/300"
   },
   {
     name: 'thaivm4',
     birth: 1972,
+    avatar: "https://picsum.photos/200/300"
   },
   {
     name: 'thaivm5',
     birth: 1973,
+    avatar: "https://picsum.photos/200/300"
   }
 ])
 
+//Data binding: ràng buộc dữ liệu
+//1 chiều: {{ tenBien }} hoặc v-bind
+//2 chiều: v-model: v-model="tenBien"
+//event binding: 
+// * dạng đầy đủ: v-on:event="hàmXửLý" VD: onclick => v-on:click=""
+// * dạng rút gọn: @event="hàmXửLý" VD: onclick => @click=""
+
+//style - class binding
+const username = ref('thaivm2');
 </script>
 
 <template>
+  <div>
+    <p>{{ username }}</p>
+    <input type="text" v-model="username">
+    <button @click="testClick">Click</button>
+  </div>
   <header>
-    <h1>Thông tin sinh viên</h1>
-    <br>
-    <p>Họ tên: {{ student.name }}</p>
-    <p>Năm sinh: {{ student.birth }}</p>
-
     <table>
       <thead>
         <tr>
           <th>Name</th>
           <th>Birth</th>
+          <th>Avatar</th>
+          <th>Avatar (viết tắt)</th>
         </tr>
       </thead>
       <tbody>
@@ -58,6 +72,8 @@ const students = reactive([
         <!-- <tr v-for="s in students"> -->
           <td>{{ s.name }}</td>
           <td>{{ s.birth }}</td>
+          <td><img v-bind:src="s.avatar" alt=""></td> <!-- viết dạng đầy đủ v-bind:attribute="value" -->
+          <td><img :src="s.avatar" alt=""></td> <!-- viết tắt :attribute="value" -->
         </tr>
       </tbody>
     </table>
