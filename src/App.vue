@@ -23,17 +23,23 @@ const students = reactive([
   {
     name: 'thaivm3',
     birth: 1971,
-    avatar: "https://picsum.photos/200/300"
+    avatar: "https://picsum.photos/200/300",
+    status: true,
+    point: 8, 
   },
   {
     name: 'thaivm4',
     birth: 1972,
-    avatar: "https://picsum.photos/200/300"
+    avatar: "https://picsum.photos/200/300",
+    status: false,
+    point: 5,
   },
   {
     name: 'thaivm5',
     birth: 1973,
-    avatar: "https://picsum.photos/200/300"
+    avatar: "https://picsum.photos/200/300",
+    status: true,
+    point: 3,
   }
 ])
 
@@ -46,13 +52,28 @@ const students = reactive([
 
 //style - class binding
 const username = ref('thaivm2');
+
+const demClick = () => {
+  count.value++; //tăng biến count lên 1 đơn vị
+}
+
+const doiTrangThai = (index) => {
+  console.log(students[index]);
+  //gán giá trị mới bằng phủ định của giá trị hiện tại
+  students[index].status = !students[index].status;
+}
 </script>
 
 <template>
+  <!-- v-model: databinding 2 chiều trong form
   <div>
     <p>{{ username }}</p>
     <input type="text" v-model="username">
-    <button @click="testClick">Click</button>
+  </div> -->
+  <div>
+    <p>{{ count }}</p>
+    <button v-on:click="demClick">Click</button> <!--dạng đầy đủ-->
+    <button @click="demClick">Click</button> <!--dạng rút gọn-->
   </div>
   <header>
     <table>
@@ -62,6 +83,10 @@ const username = ref('thaivm2');
           <th>Birth</th>
           <th>Avatar</th>
           <th>Avatar (viết tắt)</th>
+          <th>Điểm</th>
+          <th>Xếp hạng</th>
+          <th>Trạng thái</th>
+          <th>Action</th>
         </tr>
       </thead>
       <tbody>
@@ -74,6 +99,26 @@ const username = ref('thaivm2');
           <td>{{ s.birth }}</td>
           <td><img v-bind:src="s.avatar" alt=""></td> <!-- viết dạng đầy đủ v-bind:attribute="value" -->
           <td><img :src="s.avatar" alt=""></td> <!-- viết tắt :attribute="value" -->
+          <td>{{ s.point }}</td>
+          <!-- v-if: kiểm tra điều kiện, nếu điều kiện 1 đúng thì hiển thị
+          v-else-if: nếu đk1 sai và đk2 đúng
+          v-else: nếu đk1 và đk2 cùng sai thì hiển thị
+          v-show: nếu điều kiện đúng thì hiển thị ra -->
+          <td>
+            <p v-if="s.point < 5">Trượt môn</p>
+            <p v-else-if="s.point < 7">Trung bình</p>
+            <p v-else-if="s.point < 9">Khá</p>
+            <p v-else>Giỏi</p>
+          </td>
+          <td>
+            <p v-if="s.status == true">Hoạt động</p>
+            <p v-else>Không hoạt động</p>
+            <!-- <p v-show="s.status == true">Hoạt động</p> -->
+          </td>
+          <td>
+            <!-- <button @click="s.status = !s.status">Đổi trạng thái</button> -->
+            <button @click="doiTrangThai(index)">Đổi trạng thái</button>
+          </td>
         </tr>
       </tbody>
     </table>
