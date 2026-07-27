@@ -1,4 +1,5 @@
 <script setup>
+import router from '@/router';
 import axios from 'axios'; //call API
 import { onMounted, ref } from 'vue'; //tự động thực thi hàm khi component được khởi tạo
 
@@ -15,6 +16,10 @@ const delProduct = async (id) => {
         await axios.delete(`http://localhost:3000/products/${id}`); //gửi yêu cầu xóa bản ghi
         getListProducts(); //gọi hàm để lấy danh sách sản phẩm mới (sau khi xóa)
     }
+}
+
+const editProduct = (id) => {
+    router.push(`/edit/${id}`);
 }
 
 onMounted(() => {
@@ -41,6 +46,7 @@ onMounted(() => {
                 <td>{{ p.price }}</td>
                 <td><img :src="p.image" alt=""></td>
                 <td>
+                    <button @click="editProduct(p.id)">Edit</button>
                     <button @click="delProduct(p.id)">Xóa</button>
                 </td>
             </tr>
