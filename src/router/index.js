@@ -1,6 +1,5 @@
 //khai báo danh sách các màn hình trong website
 import Create from "@/pages/Create.vue";
-import Create from "@/pages/Create.vue";
 import Edit from "@/pages/Edit.vue";
 import List from "@/pages/List.vue";
 import { createRouter, createWebHistory } from "vue-router";
